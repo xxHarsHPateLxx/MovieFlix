@@ -32,7 +32,7 @@ This project consists of a backend built with FastAPI that serves movie recommen
 
 5. Start the backend server:
    ```bash
-   uvicorn app:app --reload
+   python main.py
    ```
    
    The API will be available at `http://localhost:8000`
