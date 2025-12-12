@@ -2,37 +2,8 @@
 
 A full-stack movie recommendation application that uses machine learning to suggest similar movies based on user selection.
 
-## 📁 Project Structure
-
-```
-Movie Recommendation system/
-├── backend/                 # FastAPI backend server
-│   ├── app.py              # Main API application
-│   ├── movie_dict.pkl      # Preprocessed movie data
-│   ├── similarity.pkl      # Movie similarity matrix
-│   ├── requirements.txt    # Python dependencies
-│   └── .env               # Environment variables (API keys)
-│
-├── frontend/               # React frontend application
-│   ├── src/
-│   │   ├── components/    # Reusable React components
-│   │   │   ├── MovieCard.jsx
-│   │   │   ├── Navigation.jsx
-│   │   │   └── Spinner.jsx
-│   │   ├── pages/         # Page components
-│   │   │   └── RecommendationsPage.jsx
-│   │   ├── services/      # API service layer
-│   │   │   └── recommendationApi.js
-│   │   ├── App.jsx        # Main app component
-│   │   └── main.jsx       # Entry point
-│   ├── public/            # Static assets
-│   ├── package.json       # Node dependencies
-│   └── vite.config.js     # Vite configuration
-│
-└── archive/               # Original dataset files
-    ├── tmdb_5000_credits.csv
-    └── tmdb_5000_movies.csv
-```
+## 📖 Overview
+This project consists of a backend built with FastAPI that serves movie recommendations based on content similarity using a pre-trained model. The frontend is developed using React and Vite, providing a user-friendly interface for searching movies and viewing recommendations along with their posters fetched from the TMDB API.
 
 ## 🚀 Setup Instructions
 
