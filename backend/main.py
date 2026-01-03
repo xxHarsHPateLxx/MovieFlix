@@ -19,7 +19,7 @@ load_dotenv()
 BASE_DIR = Path(__file__).parent
 MOVIES_PKL = BASE_DIR / 'movie_dict.pkl'
 SIMILARITY_PKL = BASE_DIR / 'similarity.pkl'
-ARCHIVE_DIR = BASE_DIR.parent / 'archive'
+ARCHIVE_DIR = BASE_DIR / 'archive'
 
 
 def convert_genres_keywords(text):
