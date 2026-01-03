@@ -89,13 +89,20 @@ const RecommendationsPage = () => {
       setFilteredMovies([]);
       setShowDropdown(false);
     } else {
+      const searchLower = searchTerm.toLowerCase().trim();
       const filtered = movies
         .filter(movie => 
-          movie.toLowerCase().includes(searchTerm.toLowerCase())
+          movie.toLowerCase().includes(searchLower)
         )
+        .sort((a, b) => {
+          // Sort by exact matches first, then by position of match
+          const aIndex = a.toLowerCase().indexOf(searchLower);
+          const bIndex = b.toLowerCase().indexOf(searchLower);
+          return aIndex - bIndex;
+        })
         .slice(0, 10);
       setFilteredMovies(filtered);
-      setShowDropdown(true);
+      setShowDropdown(filtered.length > 0);
     }
   }, [searchTerm, movies]);
 
@@ -106,6 +113,10 @@ const RecommendationsPage = () => {
     setFilteredMovies([]);
     setRecommendations([]);
     setError('');
+    // Blur the input after selection to prevent the dropdown from reopening
+    setTimeout(() => {
+      document.querySelector('input[placeholder*="Search for a movie"]')?.blur();
+    }, 0);
   };
 
   const handleGetRecommendations = async () => {
@@ -157,7 +168,7 @@ const RecommendationsPage = () => {
             />
             
             {showDropdown && filteredMovies.length > 0 && (
-              <ul className="autocomplete-dropdown">
+              <ul className="autocomplete-dropdown" onMouseDown={(e) => e.preventDefault()}>
                 {filteredMovies.map((movie, index) => (
                   <li
                     key={index}

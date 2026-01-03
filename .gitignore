@@ -14,8 +14,7 @@ __pycache__/
 
 # ML Models & Data
 *.pkl
-*.csv
-archive/
+
 
 # Jupyter
 .ipynb_checkpoints/
