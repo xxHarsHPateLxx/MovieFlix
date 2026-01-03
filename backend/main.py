@@ -3,6 +3,7 @@ import requests
 import pickle
 import pandas as pd
 import ast
+import gzip
 from pathlib import Path
 from dotenv import load_dotenv
 from fastapi import FastAPI, HTTPException
@@ -55,9 +56,22 @@ def generate_pkl_files():
     print("📊 Generating pickle files from CSV data...")
     
     try:
-        # Read CSV files
-        movies_df = pd.read_csv(ARCHIVE_DIR / 'tmdb_5000_movies.csv')
-        credits_df = pd.read_csv(ARCHIVE_DIR / 'tmdb_5000_credits.csv')
+        # Read CSV files (compressed)
+        movies_path = ARCHIVE_DIR / 'tmdb_5000_movies.csv.gz'
+        credits_path = ARCHIVE_DIR / 'tmdb_5000_credits.csv.gz'
+        
+        # Check if compressed files exist
+        if movies_path.exists() and credits_path.exists():
+            print("📦 Loading from compressed files...")
+            with gzip.open(movies_path, 'rb') as f:
+                movies_df = pd.read_csv(f)
+            with gzip.open(credits_path, 'rb') as f:
+                credits_df = pd.read_csv(f)
+        else:
+            # Fallback to uncompressed files if compressed versions don't exist
+            print("📁 Loading from uncompressed CSV files...")
+            movies_df = pd.read_csv(ARCHIVE_DIR / 'tmdb_5000_movies.csv')
+            credits_df = pd.read_csv(ARCHIVE_DIR / 'tmdb_5000_credits.csv')
         
         # Merge datasets
         movies_df = movies_df.merge(credits_df, on='title')
